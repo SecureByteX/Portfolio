@@ -2,154 +2,593 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sanjay Aakish | Pro Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sanjay Aakish | Cybersecurity Portfolio</title>
+  <meta name="description" content="Sanjay Aakish — Cybersecurity & Software. I build practical tools that detect and stop real-world threats: deepfake detector, suspicious API call monitor, AI-enhanced HSTS, and more." />
+  <meta property="og:title" content="Sanjay Aakish | Cybersecurity Portfolio" />
+  <meta property="og:description" content="Cybersecurity projects, skills, and contact — clean, fast, and modern portfolio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0d0d0d/ffffff&text=Sanjay+Aakish+Portfolio" />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    html {
-      scroll-behavior: smooth;
+    :root{
+      --bg:#0b0b12;         /* Dark background */
+      --panel:#0f1021;      /* Card panels */
+      --text:#e6e8ef;       /* Primary text */
+      --muted:#a9afc3;      /* Secondary text */
+      --acc:#22d3ee;        /* Accent (cyan) */
+      --acc2:#ec4899;       /* Accent (pink) */
+      --ring: rgba(34, 211, 238, .35);
     }
-    .gradient-text {
-      background: linear-gradient(to right, #6366f1, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(236, 72, 153, .12), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 0%, rgba(34, 211, 238, .12), transparent 60%),
+                  radial-gradient(700px 500px at 50% 100%, rgba(99,102,241,.10), transparent 60%),
+                  var(--bg);
+      color: var(--text);
     }
-    .glass {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+
+    /* ===== Navbar ===== */
+    .navbar {
+      background: rgba(15,16,33,.55);
+      backdrop-filter: saturate(140%) blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-link{ position:relative; color:var(--muted) !important; }
+    .nav-link.active, .nav-link:hover{ color:var(--text) !important; }
+    .nav-link::after{
+      content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:linear-gradient(90deg,var(--acc),var(--acc2)); transition:width .2s ease;
+    }
+    .nav-link:hover::after{ width:100%; }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid; place-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0; pointer-events:none; z-index:-1;
+      background:
+        radial-gradient(600px 300px at 20% 20%, rgba(34, 211, 238, .25), transparent 60%),
+        radial-gradient(600px 300px at 80% 30%, rgba(236, 72, 153, .25), transparent 60%),
+        linear-gradient(180deg, rgba(15,16,33,.0), rgba(15,16,33,.6));
+    }
+    .orbit {
+      position:absolute; inset:-20vh -20vw; z-index:-2;
+      background: conic-gradient(from 0deg, rgba(34,211,238,.08), rgba(236,72,153,.08), rgba(99,102,241,.08), rgba(34,211,238,.08));
+      filter: blur(60px); opacity:.65; animation: spin 30s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg);} }
+
+    .btn-glow{
+      --shadow: 0 10px 30px rgba(34, 211, 238, .25);
+      background: linear-gradient(90deg,var(--acc),var(--acc2));
+      border: none; color: #0b0b12; font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+    .btn-glow:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-outline-acc{
+      border: 1.5px solid var(--acc);
+      color: var(--text);
+    }
+    .btn-outline-acc:hover{ background: rgba(34,211,238,.12); }
+
+    .badge-soft{
+      border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); color: var(--muted);
+    }
+
+    /* ===== Cards / Panels ===== */
+    .card-x{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08); border-radius: 16px; overflow:hidden;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card-x:hover{ transform: translateY(-4px); border-color: rgba(34,211,238,.35); box-shadow: 0 8px 40px var(--ring); }
+
+    .tilt:hover{ transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-4px); }
+
+    .icon-wrap{
+      width: 52px; height: 52px; display:grid; place-items:center; border-radius:12px;
+      background: linear-gradient(180deg, rgba(34,211,238,.18), rgba(236,72,153,.18));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* ===== Sections ===== */
+    section.section { padding: 88px 0; }
+    .section-title { font-weight: 800; letter-spacing: .3px; }
+    .section-sub { color: var(--muted); }
+
+    /* ===== Project images placeholder ===== */
+    .project-img{
+      aspect-ratio: 16 / 9; width: 100%; border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(236,72,153,.18));
+    }
+
+    /* ===== Contact ===== */
+    .form-control, .form-select { background:#0f1222; border:1px solid rgba(255,255,255,.12); color:var(--text); }
+    .form-control:focus{ border-color: var(--acc); box-shadow: 0 0 0 .25rem rgba(34,211,238,.15); }
+
+    /* ===== Footer ===== */
+    footer{ border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Small helpers */
+    .text-gradient{
+      background: linear-gradient(90deg, var(--acc), var(--acc2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent;
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-600 text-white font-sans">
 
-  <!-- Navigation Bar -->
-  <nav class="fixed top-0 w-full glass shadow z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <h1 class="text-xl font-bold text-white">Sanjay Aakish</h1>
-      <div class="space-x-6 text-sm">
-        <a href="#home" class="hover:text-pink-400">Home</a>
-        <a href="#about" class="hover:text-pink-400">About</a>
-        <a href="#education" class="hover:text-pink-400">Education</a>
-        <a href="#skills" class="hover:text-pink-400">Skills</a>
-        <a href="#projects" class="hover:text-pink-400">Projects</a>
-        <a href="#contact" class="hover:text-pink-400">Contact</a>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-gradient" href="#home">Sanjay Aakish</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
-    <div class="absolute -z-10 w-full h-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-10 rounded-full blur-3xl"></div>
-    <img src="assets/profile_pic.jpg" alt="Profile Picture" class="w-40 h-52 object-cover rounded-md shadow-xl border-4 border-white mb-6" />
-    <h2 class="text-5xl font-extrabold gradient-text mb-2">Sanjay Aakish T S</h2>
-    <div id="typed-text" class="text-xl text-white mb-6"></div>
-    <a href="https://drive.google.com/file/d/1OauSriE_oQa0o7sLiy1Cq4_rF-I_QVa_/view?usp=sharing" target="_blank" class="inline-block px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg text-white shadow-lg transition">Download Resume</a>
-    <div class="absolute bottom-4 text-sm text-white opacity-50 animate-bounce">Scroll Down ↓</div>
-    <div class="absolute bottom-4 text-sm text-white opacity-50 animate-bounce">Scroll Down ↓</div>
-  </section>
+  <!-- ========== HERO ========== -->
+  <header id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="orbit"></div>
 
-  <!-- About Section -->
-  <section id="about" class="py-24 px-6 bg-gray-900 bg-opacity-70 backdrop-blur" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-6">About Me</h3>
-      <p class="text-lg leading-relaxed text-gray-200">I am a Computer Science and Engineering student of Jain University. An enthusiastic and analytical student with a passion for cybersecurity and real-world problem solving. Experienced in developing mini-projects such as API call monitors, Deep Fake Detector etc... Keen to contribute to security-focused roles and expand hands-on experience with threat detection, ethical hacking, and secure software development.</p>
-    </div>
-  </section>
+    <div class="container py-5">
+      <div class="row align-items-center justify-content-center text-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <!-- Profile image: replace src with your own path (kept optional) -->
+          <img src="assets/profile_pic.jpg" alt="Profile" class="rounded-4 border border-2 border-white mb-4" style="width:128px;height:160px;object-fit:cover;">
+          <h1 class="display-4 fw-bold mb-2">Sanjay Aakish T S</h1>
+          <p class="lead mb-3 text-gradient fw-semibold">
+            <span id="typed"></span>
+          </p>
+          <p class="mb-4 text-opacity-75 section-sub mx-auto" style="max-width: 760px;">
+            I build hands-on cybersecurity tools that detect and stop real-world threats — from a Suspicious API Call Monitor to a Deepfake Detector and AI‑enhanced HSTS.
+          </p>
+          <div class="d-flex gap-3 justify-content-center">
+            <a href="#projects" class="btn btn-glow px-4 py-2 rounded-pill"><i class="bi bi-kanban me-2"></i>View Projects</a>
+            <a href="assets/Resume.pdf" target="_blank" class="btn btn-outline-acc px-4 py-2 rounded-pill"><i class="bi bi-file-earmark-arrow-down me-2"></i>Download Resume</a>
 
-  <!-- Education Section -->
-  <section id="education" class="py-24 px-6 bg-black bg-opacity-40" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-6">Education</h3>
-      <div class="text-lg text-gray-200 space-y-4">
-        <div>
-          <strong>Jain University</strong><br>
-          B.Tech - Computer Science and Engineering (Cybersecurity)<br>
-          2023 - Present | CGPA: 8.1 (Upto 4th Sem)
+          </div>
+          <div class="mt-4">
+            <span class="badge rounded-pill badge-soft me-2"><i class="bi bi-geo-alt me-1"></i>India</span>
+            <span class="badge rounded-pill badge-soft me-2"><i class="bi bi-shield-lock me-1"></i>Cybersecurity</span>
+            <span class="badge rounded-pill badge-soft"><i class="bi bi-github me-1"></i><a href="https://github.com/SecureByteX" class="text-decoration-none" target="_blank">SecureByteX</a></span>
+          </div>
         </div>
-        <div>
-          <strong>BVB Matric Higher Secondary School</strong><br>
-          HSC (Computer Science) - 84%<br>
-           <strong>SVV Matric Higher Secondary School</strong><br>
-          SSLC - 87%%<br>
-          
+      </div>
+      <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="200">
+        <i class="bi bi-mouse fs-3 d-block text-gradient"></i>
+        <small class="text-secondary">Scroll</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="section-title mb-3">About Me</h2>
+          <p class="section-sub">Pre-final year B.Tech CSE student specializing in Cyber Security at Jain University. Skilled in ethical hacking, threat detection, cloud security, and incident response. Experienced in projects like API Call Monitor, Deepfake Detector, and Malicious URL Blocker. Passionate about solving real-world security challenges.</p>
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <span class="badge rounded-pill" style="background:rgba(34,211,238,.12); color:var(--text); border:1px solid rgba(34,211,238,.35)">Threat Detection</span>
+            <span class="badge rounded-pill" style="background:rgba(236,72,153,.12); color:var(--text); border:1px solid rgba(236,72,153,.35)">Malware Analysis</span>
+            <span class="badge rounded-pill badge-soft">Ethical Hacking</span>
+            <span class="badge rounded-pill badge-soft">Web Development</span>
+          </div>
+        </div>
+        <div class="col-lg-5 ms-lg-auto" data-aos="fade-left">
+          <div class="card-x p-4 h-100">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-wrap me-3"><i class="bi bi-patch-check fs-4"></i></div>
+              <div>
+                <div class="fw-bold">What I'm looking for</div>
+                <div class="small text-secondary">Internships / roles in cybersecurity engineering, detection engineering, or secure software.</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-wrap me-3"><i class="bi bi-lightning-charge fs-4"></i></div>
+              <div>
+                <div class="fw-bold">I love shipping</div>
+                <div class="small text-secondary">Turning ideas into measurable, reliable defenses — with demos, metrics, and docs.</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="icon-wrap me-3"><i class="bi bi-journal-code fs-4"></i></div>
+              <div>
+                <div class="fw-bold">Recent focus</div>
+                <div class="small text-secondary">Deepfake detection, APK Info Viewer, Phishing Email DEtection, Suspicious API call monitoring.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="py-24 bg-gray-900" data-aos="fade-up">
-    <div class="max-w-6xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-12">Technical Skills</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-gray-100">
-        <div class="p-4 glass rounded-lg">Network Security</div>
-        <div class="p-4 glass rounded-lg">Python</div>
-        <div class="p-4 glass rounded-lg">Ethical Hacking</div>
-        <div class="p-4 glass rounded-lg">Enterpreneurship</div>
-        <div class="p-4 glass rounded-lg">Cloud Security</div>
-        <div class="p-4 glass rounded-lg">Software Development</div>
-        <div class="p-4 glass rounded-lg">Web Development</div>
-        <div class="p-4 glass rounded-lg">DBMS</div>
-        <div class="p-4 glass rounded-lg">Operating System</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="py-24 px-6 bg-gray-800" data-aos="fade-up">
-    <div class="max-w-5xl mx-auto">
-      <h3 class="text-3xl font-bold text-center mb-10">Project Highlights</h3>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="glass p-6 rounded-xl shadow-lg">
-          <h4 class="text-xl font-semibold text-pink-300">Suspicious API Call monitors</h4>
-          <p class="text-gray-100 mt-2">The Suspicious API Call Monitor is useful because it helps detect malware, unauthorized access, and system vulnerabilities by monitoring API calls in real time. It improves system security by alerting administrators to suspicious behavior, allowing quick responses to potential threats.</p>
-        </div>
-        <div class="glass p-6 rounded-xl shadow-lg">
-          <h4 class="text-xl font-semibold text-pink-300">Deepfake Detector for Social Media Security </h4>
-          <p class="text-gray-100 mt-2">The Deep Fake Detector for Social Media Security is useful because it helps protect users from threats like disinformation, identity theft, and cyberbullying by detecting manipulated images, videos, and audio. It uses advanced AI and deep learning techniques to analyze content in real time and alerts platforms like Facebook, Instagram, and Twitter, helping prevent the spread of harmful deepfakes and ensuring safer social media environments.</p>
-        </div>
-        <div class="glass p-6 rounded-xl shadow-lg">
-          <h4 class="text-xl font-semibold text-pink-300">AI-Enhanced Defence Mechanism Against MITM Attacks</h4>
-          <p class="text-gray-100 mt-2">The Enhanced HSTS with AI Integration is useful because it strengthens protection against man-in-the-middle (MITM) attacks by ensuring secure HTTPS connections and preventing data interception. By using AI to detect anomalies and analyze behavior in real time, it adds a proactive layer of defense. This makes HSTS more adaptive and effective, reducing vulnerabilities and improving the overall security of online communications.</p>
+  <!-- ========== EDUCATION ========== -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <h2 class="section-title mb-4">Education</h2>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="card-x p-4 h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h5 class="mb-1">Jain University</h5>
+                    <div class="text-secondary small">B.Tech — Computer Science & Engineering (Cybersecurity)</div>
+                  </div>
+                  <span class="badge badge-soft">2023 – Present</span>
+                </div>
+                <hr class="opacity-10">
+                <div class="small">CGPA: <strong>8.1</strong> (up to 4th Sem)</div>
+                <div class="small mt-2 text-secondary">Relevant coursework: Network Security, Ethical Hacking, Secure Software, OS, DBMS.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-x p-4 h-100">
+                <h5 class="mb-1">BVB Matric Hr. Sec. School</h5>
+                <div class="text-secondary small mb-2">HSC (Computer Science) — 84%</div>
+                <h6 class="mb-1 mt-3">SVV Matric Hr. Sec. School</h6>
+                <div class="text-secondary small">SSLC — 87%</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 px-6 bg-gradient-to-t from-gray-900 to-gray-800" data-aos="fade-up">
-    <div class="text-center max-w-3xl mx-auto">
-      <h3 class="text-3xl font-bold mb-6">Ping Me for Collaboration</h3>
-      <div class="mt-4 space-y-2 text-gray-300">
-        <p>Email: <a href="mailto:sanjayaakish8229@gmail.com" class="text-pink-400">sanjayaakish8229@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/sanjay-aakish" class="text-pink-400">www.linkedin.com/in/sanjay-aakish</a></p>
-        <p>GitHub: <a href="https://github.com/SecureByteX" class="text-pink-400">github.com/SecureByteX</a></p>
-        <p>Phone: <span class="text-pink-400">+91 9994483930</span></p>
+  <!-- ========== SKILLS ========== -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <h2 class="section-title mb-4">Technical Skills</h2>
+          <p class="section-sub">Organized for quick scanning — grouped by category.</p>
+          <div class="row g-3 mt-2">
+            <!-- Languages -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-code-slash me-2"></i>
+                  <strong>Languages</strong>
+                </div>
+                <div class="small text-secondary">Python, Java, HTML, CSS, Javascript, C++, Github, VS code, Eclipse </div>
+              </div>
+            </div>
+            <!-- Security Tools -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-shield-lock me-2"></i>
+                  <strong>Security</strong>
+                </div>
+                <div class="small text-secondary">Nmap, Burp Suit, Wireshark, IPS/IDS configuration, Firewall management, Secure Network Architecture, Metasploit</div>
+              </div>
+            </div>
+            <!-- Frameworks -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-boxes me-2"></i>
+                  <strong>Frameworks</strong>
+                </div>
+                <div class="small text-secondary">TensorFlow, IDS/IPS Framework, Metasploit Framework</div>
+              </div>
+            </div>
+            <!-- Web/DB -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-globe me-2"></i>
+                  <strong>Web & DB</strong>
+                </div>
+                <div class="small text-secondary">Web Development, DBMS, Operating System</div>
+              </div>
+            </div>
+            <!-- Cloud/DevOps -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-cloud-arrow-up me-2"></i>
+                  <strong>Cloud/DevOps</strong>
+                </div>
+                <div class="small text-secondary">AWS, Microsoft Azure, Google Cloud Platform basics</div>
+              </div>
+            </div>
+            <!-- Soft Skills / Entrepreneurship (fixed typo) -->
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-x p-3 tilt h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-people me-2"></i>
+                  <strong>Professional</strong>
+                </div>
+                <div class="small text-secondary">Entrepreneurship, Time Management, Teamwork, Communication, Leadership</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-black text-center py-6 text-gray-400 text-sm">
-    &copy; 2025 Sanjay Aakish T S • Securing tomorrow with today’s passion ✨
+  <!-- ========== PROJECTS ========== -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <h2 class="section-title mb-4">Project Highlights</h2>
+          <p class="section-sub">Each card follows the case‑study structure: Problem → Approach → Impact.</p>
+
+          <div class="row g-4 mt-1">
+            <!-- Project 1 -->
+           <div class="col-md-6">
+  <div class="card-x h-100">
+    <div class="project-img">
+      <img src="assets/apicallmonitor.png" alt="Suspicious API Call Monitor" class="img-fluid rounded-top">
+    </div>
+    <div class="p-4">
+      <h5 class="mb-1">Suspicious API Call Monitor</h5>
+      <div class="small text-secondary mb-2">Windows API call tracing · Real-time alerts</div>
+      <p class="small">Monitors API calls to detect malware, unauthorized access, and system abuse. Alerts on anomalies for rapid response.</p>
+      <ul class="small text-secondary mb-3">
+        <li><strong>Approach:</strong> Hook-based monitoring, rules + ML heuristics</li>
+        <li><strong>Impact:</strong> Reduced triage time; fewer false positives</li>
+      </ul>
+      <div class="d-flex gap-2">
+        <!-- Code button: update href with your GitHub repo link -->
+        <a class="btn btn-sm btn-outline-acc rounded-pill" href="https://github.com/SecureByteX/Suspicious-API-Call-Monitor" target="_blank">
+          <i class="bi bi-github me-1"></i>Code
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+            <!-- Project 2 -->
+<div class="col-md-6">
+  <div class="card-x h-100">
+    <div class="project-img">
+      <img src="assets/deepfake.png" alt="Deepfake Detector for Social Media" class="img-fluid rounded-top">
+    </div>
+    <div class="p-4">
+      <h5 class="mb-1">Deepfake Detector for Social Media</h5>
+      <div class="small text-secondary mb-2">CNN-based detection · Images & video</div>
+      <p class="small">AI-powered tool to flag manipulated media before it spreads. Designed as a transparent advisory layer.</p>
+      <ul class="small text-secondary mb-3">
+        <li><strong>Approach:</strong> Python, TensorFlow, OpenCV</li>
+        <li><strong>Impact:</strong> High detection accuracy with low latency</li>
+      </ul>
+      <div class="d-flex gap-2">
+        <!-- Code button: update href with your GitHub repo link -->
+        <a class="btn btn-sm btn-outline-acc rounded-pill" href="https://github.com/SecureByteX/DeepFake-Detector" target="_blank">
+          <i class="bi bi-github me-1"></i>Code
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+            <!-- Project 3 -->
+            <div class="col-md-6">
+  <div class="card-x h-100">
+    <div class="project-img">
+      <img src="assets/mitm.png" alt="AI-Enhanced HSTS" class="img-fluid rounded-top">
+    </div>
+    <div class="p-4">
+      <h5 class="mb-1">AI-Enhanced HSTS (Against MITM)</h5>
+      <div class="small text-secondary mb-2">HTTPS enforcement · Anomaly detection</div>
+      <p class="small">Enhances HTTP Strict Transport Security with AI to defend against man-in-the-middle attacks. Uses anomaly detection and adaptive policies to block downgrade attempts and session hijacking.</p>
+      <ul class="small text-secondary mb-3">
+        <li><strong>Approach:</strong> Policy enforcement + AI-based traffic heuristics</li>
+        <li><strong>Impact:</strong> Stronger HTTPS sessions; reduced MITM risks</li>
+      </ul>
+      <div class="d-flex gap-2">
+        <!-- Code button: update href with your GitHub repo link -->
+        <a class="btn btn-sm btn-outline-acc rounded-pill" href="https://github.com/SecureByteX/AI-Enhanced-MITM" target="_blank">
+          <i class="bi bi-github me-1"></i>Code
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+             <!-- Project 4 -->
+<div class="col-md-6">
+  <div class="card-x h-100">
+    <div class="project-img">
+      <img src="assets/phishing.png" alt="Phishing Email Detection" class="img-fluid rounded-top">
+    </div>
+    <div class="p-4">
+      <h5 class="mb-1">Phishing Email Detection</h5>
+      <div class="small text-secondary mb-2">Email security · Suspicious links & content analysis</div>
+      <p class="small">AI-powered system that identifies and blocks phishing attempts by analyzing sender anomalies, malicious links, and deceptive content.</p>
+      <ul class="small text-secondary mb-3">
+        <li><strong>Approach:</strong> Rule-based + ML classification</li>
+        <li><strong>Impact:</strong> Prevents credential theft and sensitive data exposure</li>
+      </ul>
+      <div class="d-flex gap-2">
+        <!-- Code button: update href with your GitHub repo link -->
+        <a class="btn btn-sm btn-outline-acc rounded-pill" href="https://github.com/SecureByteX/Phishing-Email-Detection" target="_blank">
+          <i class="bi bi-github me-1"></i>Code
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10" data-aos="fade-up">
+        <h2 class="section-title mb-3">Ping Me for Collaboration</h2>
+        <p class="section-sub">Email is best. You can also reach me on LinkedIn or GitHub.</p>
+
+        <div class="row g-4 mt-1">
+          <!-- Left Column: Contact Info -->
+          <div class="col-md-6">
+            <div class="card-x p-4 h-100">
+              <h6 class="mb-3">Direct Contact</h6>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-envelope me-2"></i> 
+                <a class="link-light text-decoration-none" href="mailto:sanjayaakish8229@gmail.com">sanjayaakish8229@gmail.com</a>
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-linkedin me-2"></i> 
+                <a class="link-light text-decoration-none" href="https://linkedin.com/in/sanjay-aakish" target="_blank">linkedin.com/in/sanjay-aakish</a>
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-github me-2"></i> 
+                <a class="link-light text-decoration-none" href="https://github.com/SecureByteX" target="_blank">github.com/SecureByteX</a>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-telephone me-2"></i> 
+                <span class="text-light">+91 99944 83930</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Contact Form -->
+          <div class="col-md-6">
+            <div class="card-x p-4 h-100">
+              <h6 class="mb-3">Quick Message</h6>
+              <!-- ✅ Formspree Integration -->
+              <form action="https://formspree.io/f/manbzlwd" method="POST">
+                <div class="row g-2">
+                  <div class="col-12">
+                    <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                  </div>
+                  <div class="col-12">
+                    <input type="email" class="form-control" name="email" placeholder="Your email" required>
+                  </div>
+                  <div class="col-12">
+                    <textarea class="form-control" rows="4" name="message" placeholder="Message" required></textarea>
+                  </div>
+                  <div class="col-12 d-grid">
+                    <button class="btn btn-glow rounded-pill" type="submit">
+                      <i class="bi bi-send me-2"></i>Send
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <!-- ✅ End Formspree -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-4 text-center text-secondary">
+    <div class="container small">
+      <div class="mb-2">&copy; <span id="year"></span> <strong>Sanjay Aakish T S</strong> • Securing tomorrow with today’s passion ✨</div>
+      <div>
+        <a class="link-secondary me-3" href="#home">Home</a>
+        <a class="link-secondary me-3" href="#projects">Projects</a>
+        <a class="link-secondary" href="https://drive.google.com/file/d/1OauSriE_oQa0o7sLiy1Cq4_rF-I_QVa_/view?usp=sharing" target="_blank">Resume</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    AOS.init();
-    new Typed('#typed-text', {
-      strings: ['Cybersecurity Analysist'],
-      typeSpeed: 60,
-      backSpeed: 40,
-      loop: true,
-    cursorChar: '', 
-    showCursor: false
-    });
-  </script>
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <script>
+    // Init AOS
+    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
+
+    // Init Typed
+    new Typed('#typed', {
+      strings: [
+        'Cybersecurity Analyst',
+        'Secure Software Developer',
+        'Threat Detection Enthusiast'
+      ],
+      typeSpeed: 45,
+      backSpeed: 28,
+      backDelay: 1200,
+      smartBackspace: true,
+      loop: true,
+      showCursor: false
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Activate nav link based on scroll
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const activate = () => {
+      let fromTop = window.scrollY + 100;
+      sections.forEach(sec => {
+        if (sec.offsetTop <= fromTop && (sec.offsetTop + sec.offsetHeight) > fromTop) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const id = sec.getAttribute('id');
+          const active = document.querySelector(`.nav-link[href="#${id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    };
+    window.addEventListener('scroll', activate);
+    activate();
+  </script>
 </body>
 </html>
